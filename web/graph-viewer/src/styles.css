@@ -1,0 +1,275 @@
+:root {
+  --bg: #f3f4f6;
+  --bg-canvas: #e9ebef;
+  --panel: #fcfcfd;
+  --border: #c9ced6;
+  --text: #1a1f27;
+  --muted: #5c6675;
+  --accent: #243447;
+  --accent-soft: #e4e8ee;
+  --danger: #9f1f1f;
+  --node: #fcfcfd;
+  --node-border: #7d8796;
+  --node-selected: #dfe5ee;
+  --edge: #8b95a3;
+  --grid: #d5d9e0;
+  --font: "JetBrains Mono", ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  background: var(--bg);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.brand-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.brand-name span {
+  color: var(--accent);
+}
+
+.brand-meta {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 320px);
+  min-height: 0;
+}
+
+.canvas-wrap {
+  position: relative;
+  overflow: auto;
+  min-height: 0;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    var(--bg-canvas);
+  background-size: 20px 20px, 20px 20px, auto;
+  background-position: -1px -1px;
+}
+
+.status {
+  padding: 1rem 1.1rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.error {
+  color: var(--danger);
+}
+
+.search {
+  flex: 1;
+  max-width: 26rem;
+}
+
+.search input {
+  width: 100%;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.78rem;
+  outline: none;
+}
+
+.search input:focus {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.search input::placeholder {
+  color: var(--muted);
+}
+
+.graph-svg {
+  display: block;
+  min-width: 100%;
+}
+
+.edge {
+  fill: none;
+  stroke: var(--edge);
+  stroke-width: 1.2;
+  opacity: 0.95;
+}
+
+.edge.dim {
+  opacity: 0.16;
+}
+
+.edge.hot {
+  stroke: var(--accent);
+  stroke-width: 1.7;
+  opacity: 1;
+}
+
+.node {
+  cursor: pointer;
+}
+
+.node rect {
+  fill: var(--node);
+  stroke: var(--node-border);
+  stroke-width: 1.2;
+}
+
+.node text {
+  fill: var(--text);
+  font-size: 11px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.node.dim {
+  opacity: 0.22;
+}
+
+.node.hot rect,
+.node.selected rect {
+  fill: var(--node-selected);
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+
+.node.cycle rect {
+  stroke: var(--danger);
+}
+
+.panel {
+  border-left: 1px solid var(--border);
+  background: var(--panel);
+  padding: 0.95rem 1rem;
+  overflow: auto;
+}
+
+.panel.empty {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.panel.empty p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.panel h2 {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.panel .kind {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  padding: 0.08rem 0.3rem;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.panel .badge-cycle {
+  margin-left: 0.3rem;
+  background: #f8e8e8;
+  border-color: #e0b0b0;
+  color: var(--danger);
+}
+
+.panel section {
+  margin-top: 0.85rem;
+}
+
+.panel h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.panel li {
+  padding: 0.18rem 0;
+  font-size: 0.74rem;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.meta {
+  display: flex;
+  gap: 0.9rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 800px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .panel {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    max-height: 40vh;
+  }
+
+  .brand-meta {
+    display: none;
+  }
+}

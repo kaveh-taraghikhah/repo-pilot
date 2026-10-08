@@ -1,0 +1,11 @@
+{
+  "name": "broken-env",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {
+      "name": "api-cannot-import-database",
+      "from": "src/api/**",
+      "cannotImport": ["src/repositories/**"]
+    }
+  ]
+}

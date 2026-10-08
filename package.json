@@ -1,0 +1,50 @@
+{
+  "name": "repopilot",
+  "version": "0.8.0",
+  "description": "Local TypeScript CLI for change blast radius — impact analysis before you merge.",
+  "type": "module",
+  "bin": {
+    "repopilot": "./dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "bun src/cli.ts",
+    "dev:web": "cd web/graph-viewer && bun run dev",
+    "build:web": "cd web/graph-viewer && bun install && bun run build",
+    "build:cli": "bun scripts/build.ts --cli-only",
+    "build": "bun scripts/build.ts",
+    "prepare": "bun run build:cli",
+    "demo": "bun scripts/demo.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "cli",
+    "typescript",
+    "developer-tools",
+    "codebase",
+    "static-analysis"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^13.1.0",
+    "minimatch": "^10.0.3",
+    "picocolors": "^1.1.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.15",
+    "@types/node": "^22.15.29",
+    "vitest": "^3.2.1"
+  }
+}

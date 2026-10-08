@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.cache/
+.repopilot/
+*.repopilot.*.mjs
+*.log
+.DS_Store
+coverage/
+.vitest/
+.env
+.env.local
